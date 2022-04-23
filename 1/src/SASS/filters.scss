@@ -1,0 +1,45 @@
+.filter-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+input {
+    appearance: none;
+    color: rgb(0, 0, 0);
+    background-color: transparent;
+    padding: 7px;
+    border: none;
+    border: 1px solid rgb(201, 201, 201);
+    border-radius: 2px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input::placeholder {
+    color: rgb(143, 143, 143);
+}
+
+select {
+    color: rgb(0, 0, 0);
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    border: 1px solid rgb(201, 201, 201);
+    padding: 7px;
+    border-radius: 2px;
+}
+
+select.non-selected {
+    color: rgb(143, 143, 143);
+}
+option {
+    background-color: rgb(216, 216, 216);
+    color: black;
+}
