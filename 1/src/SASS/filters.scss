@@ -7,16 +7,34 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 20px;
+    @include respond("tablet") {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 input {
     appearance: none;
-    color: rgb(0, 0, 0);
-    background-color: transparent;
-    padding: 7px;
+    padding: 10px;
     border: none;
-    border: 1px solid rgb(201, 201, 201);
-    border-radius: 2px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 400px;
+    position: relative;
+
+    @include respond("tablet") {
+        width: 100%;
+    }
+
+    &.light {
+        background-color: map-get($map: $color-palette, $key: "light-mode-elements");
+        color: map-get($map: $color-palette, $key: "light-mode-text");
+    }
+    &.dark {
+        background-color: map-get($map: $color-palette, $key: "dark-mode-elements");
+        color: map-get($map: $color-palette, $key: "dark-mode-text");
+    }
 }
 
 input:-webkit-autofill,
@@ -28,22 +46,26 @@ input:-webkit-autofill:active {
 }
 
 input::placeholder {
-    color: rgb(143, 143, 143);
+    color: map-get($map: $color-palette, $key: "input");
 }
 
 select {
-    color: rgb(0, 0, 0);
     appearance: none;
-    background-color: transparent;
     border: none;
-    border: 1px solid rgb(201, 201, 201);
     padding: 7px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 2px;
+
+    &.light {
+        background-color: map-get($map: $color-palette, $key: "light-mode-elements");
+        color: map-get($map: $color-palette, $key: "light-mode-text");
+    }
+    &.dark {
+        background-color: map-get($map: $color-palette, $key: "dark-mode-elements");
+        color: map-get($map: $color-palette, $key: "dark-mode-text");
+    }
 }
 
-select.non-selected {
-    color: rgb(143, 143, 143);
-}
 option {
     background-color: rgb(216, 216, 216);
     color: black;

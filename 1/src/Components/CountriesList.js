@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import '../SASS/filters.scss'
 import Theme from '../Context/Theme'
+import {AiOutlineSearch} from 'react-icons/ai'
 
 const CountriesList = ({countries}) => {
     const regions = [...new Set([...countries].map((item) => item.region))]
@@ -25,6 +26,8 @@ const CountriesList = ({countries}) => {
             {/* changing serach param based on input value */}
             <div className='filter-box'>
                 <input
+                    placeholder={`search for a country ...`}
+                    className={theme}
                     value={searchParams.get("search") || ""}
                     onChange={(event) => {
                         let search = event.target.value;
@@ -36,7 +39,7 @@ const CountriesList = ({countries}) => {
                     }}
                 />
 
-                <select onChange={(e) => setFilterRegion(e.target.value)}>
+                <select className={theme} onChange={(e) => setFilterRegion(e.target.value)}>
                     <option className="default" value="" selected hidden>region</option>
                     <option value="all">All</option>
                     {regions.map((item) => 

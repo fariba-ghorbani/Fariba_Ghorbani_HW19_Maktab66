@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar";
 import CountryInfo from "./Components/CountryInfo";
 import Main from "./Pages/Main";
 import Theme from "./Context/Theme";
+import NotFound from "./Components/NotFound";
 
 function App() {
 	const [data, setData] = useState([])
@@ -38,6 +39,7 @@ function App() {
 				<Route path='/' element={<Navbar />}>
 					<Route index element={<Main countries={data} error={error} loading={loading}/>} />
 					<Route path=':countryURL' element={<CountryInfo countries={data} error={error} loading={loading} />} />
+					<Route path="*" element={<NotFound />}/>
 				</Route>
 			</Routes>
 		</Theme.Provider>

@@ -4,6 +4,8 @@ import '../SASS/eachcountry.scss'
 import BorderCountries from './BorderCountries';
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 import Theme from '../Context/Theme';
+import Loading from './Loading';
+import NotFound from './NotFound';
 
 const CountryInfo = ({countries, error,loading}) => {
     const { countryURL } = useParams()
@@ -16,8 +18,8 @@ const CountryInfo = ({countries, error,loading}) => {
     })
 
     console.log(info)
-    if (loading) return 'loading ...'
-    if (error) return 'error ...'
+    if (loading) return <Loading />
+    if (error) return 'error'
     return (
         <>
         {info.current?
@@ -63,7 +65,7 @@ const CountryInfo = ({countries, error,loading}) => {
 
                 </div>
             </main>
-        : null}
+        : <NotFound />}
         </>
     )
 }
