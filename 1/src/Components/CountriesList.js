@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import '../SASS/country.scss'
+import React, { useEffect, useState, useContext } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import '../SASS/filters.scss'
+import Theme from '../Context/Theme'
 
-const MainCountriesList = ({countries, error, loading}) => {
+const CountriesList = ({countries}) => {
     const regions = [...new Set([...countries].map((item) => item.region))]
     const [filterRegion, setFilterRegion] = useState('')
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate()
+    const { theme } = useContext(Theme)
 
     const goToCountryPage = (url) => {
         navigate(url)
@@ -18,8 +19,7 @@ const MainCountriesList = ({countries, error, loading}) => {
         console.log(filterRegion);
     }, [filterRegion])
 
-    if (loading) return 'loading ...'
-    if (error) return 'error ...'
+
     return (
         <div className='main-page'>
             {/* changing serach param based on input value */}
@@ -38,6 +38,7 @@ const MainCountriesList = ({countries, error, loading}) => {
 
                 <select onChange={(e) => setFilterRegion(e.target.value)}>
                     <option className="default" value="" selected hidden>region</option>
+                    <option value="all">All</option>
                     {regions.map((item) => 
                         <option key={item}>{item}</option>
                     )}
@@ -54,22 +55,22 @@ const MainCountriesList = ({countries, error, loading}) => {
                     return name.startsWith(search.toLowerCase())
                     })
                 .filter(country => {
-                    if (!filterRegion) return true;
+                    if (!filterRegion || filterRegion==="all") return true;
                     return country.region === filterRegion
                 })
                 .map(country => 
                     (
                         <div 
                         key={country.name} 
-                        className='country'
+                        className={`country ${theme}`}
                         onClick={() => goToCountryPage(country.alpha3Code)}
                         >
                             <img className='figure' src={country.flags.svg} alt={'test'}></img>
                             <div className='caption'>
-                                <h4>{country.name}</h4>
-                                <p>Population: {country.population}</p>
-                                <p>Region: {country.region}</p>
-                                <p>Capital: {country.capital}</p>
+                                <h3 className='title'>{country.name}</h3>
+                                <p><strong>Population: </strong>{country.population}</p>
+                                <p><strong>Region: </strong>{country.region}</p>
+                                <p><strong>Capital: </strong>{country.capital}</p>
                             </div>
                         </div>
                     )
@@ -79,4 +80,4 @@ const MainCountriesList = ({countries, error, loading}) => {
     )
 }
 
-export default MainCountriesList;
+export default CountriesList;
