@@ -2,6 +2,7 @@
 @import './mixin';
 
 .main-page {
+    min-height: 100vh;
     padding: 10px 50px;
     &.dark {
         color: map-get($map: $color-palette, $key: "dark-mode-text");
